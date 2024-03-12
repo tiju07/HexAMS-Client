@@ -29,6 +29,6 @@ export class AssetService {
     }
 
     deleteAsset(id: number) {
-        return this.http.delete<HttpResponse<IAsset | any>>(`${this.url} / Assets / ` + id, { withCredentials: true, observe: 'response' })
+        return this.http.delete<HttpResponse<IAsset | any>>(`${this.url}/Assets/` + id, { withCredentials: true, observe: 'response' })
     }
 }
