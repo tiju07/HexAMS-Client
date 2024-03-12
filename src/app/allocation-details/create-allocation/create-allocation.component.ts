@@ -75,7 +75,3 @@ export const dateRangeValidator: ValidatorFn = (control: AbstractControl): Valid
     return from && to && new Date(to.value) <= new Date(from.value) ? { dateRange: true } : null;
 };
 
-export const dateValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    const data = control.get('deadline');
-    return data as any as Date>= new Date() ? { dateRange: true } : null;
-};

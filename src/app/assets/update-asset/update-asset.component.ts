@@ -9,6 +9,7 @@ import { IAsset } from '../../interfaces/iasset';
 import { formatDate } from '@angular/common';
 import { CloudinaryImageUploadService } from '../../services/image-upload/cloudinary-image-upload.service';
 import { ICloudinaryUploadResponse } from '../../interfaces/iclodinaryuploadresponse';
+import { dateRangeValidator } from '../create-asset/create-asset.component';
 
 declare var bootstrap: any;
 
@@ -41,10 +42,23 @@ export class UpdateAssetComponent {
         manufacturingDate: new FormControl(formatDate(new Date(), "yyyy-MM-dd", "en")),
         expiryDate: new FormControl(formatDate(new Date(), "yyyy-MM-dd", "en")),
         assetValue: new FormControl(null, [Validators.required, Validators.min(1)]),
-    })
+    }, { validators: dateRangeValidator })
 
     validator(control: string) {
         return this.form.get(control)?.hasError('required') && this.form.get(control)?.touched;
+    }
+
+    minManufacturingDateValidator() {
+        const value = this.form.get('manufacturingDate')?.value;
+        if (value != null && value != "") {
+            return new Date() < new Date(value)
+        }
+        return false;
+    }
+
+    validateDateRange() {
+        return this.form.get('manufacturingDate')?.dirty && this.form.get('expiryDate')?.dirty &&
+            this.form.hasError('dateRange');
     }
 
     toggleTouched() {

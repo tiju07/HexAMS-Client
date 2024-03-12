@@ -165,6 +165,7 @@
                             >Please select a status!</span
                         >
                     </div>
+                    {{ form.errors | json }}
                     <div class="form-floating mb-3">
                         <input
                             type="date"
@@ -172,8 +173,16 @@
                             id="manufInput"
                             formControlName="manufacturingDate"
                             placeholder=""
+                            [ngClass]="{
+                                'is-invalid': minManufacturingDateValidator()
+                            }"
                         />
                         <label for="manufInput">Manufacturing Date</label>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="minManufacturingDateValidator()"
+                            >Please enter a date less than today !</span
+                        >
                     </div>
                     <div class="form-floating mb-3">
                         <input
@@ -182,8 +191,27 @@
                             id="expiryInput"
                             formControlName="expiryDate"
                             placeholder=""
+                            [ngClass]="{
+                                'is-invalid':
+                                    form.get('manufacturingDate')?.dirty &&
+                                    form.get('expiryDate')?.dirty &&
+                                    validateDateRange(),
+                                'is-valid':
+                                    !form.hasError('dateRange') &&
+                                    form.get('expiryDate')?.dirty
+                            }"
                         />
                         <label for="expiryInput">Expiry Date</label>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('manufacturingDate')?.dirty &&
+                                form.get('expiryDate')?.dirty &&
+                                form.hasError('dateRange')
+                            "
+                            >Expiry date should be greater than Manufacturing
+                            date!</span
+                        >
                     </div>
                     <div class="form-floating mb-3">
                         <input
