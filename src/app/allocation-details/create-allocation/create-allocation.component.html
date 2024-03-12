@@ -1,0 +1,228 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Add New Allocation</h2>
+            </div>
+            <div class="d-flex flex-column flex-wrap align-items-center form">
+                <form
+                    [formGroup]="form"
+                    data-bs-theme="dark"
+                    class="d-flex flex-column"
+                    (ngSubmit)="createAllocation()"
+                >
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="employeeID"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('employeeID')?.valid &&
+                                    form.get('employeeID')?.touched,
+                                'is-valid': form.get('employeeID')?.valid
+                            }"
+                        >
+                            <option selected value="null">
+                                Select an Employee
+                            </option>
+                            <option
+                                *ngFor="let employee of employees"
+                                [value]="employee.id"
+                            >
+                                {{
+                                    employee.id + " - ( " + employee.name + " )"
+                                }}
+                            </option>
+                        </select>
+                        <label for="floatingSelect"
+                            >Employee <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('employeeID')?.valid &&
+                                form.get('employeeID')?.touched
+                            "
+                            >Please select an employee!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="assetID"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('assetID')?.valid &&
+                                    form.get('assetID')?.touched,
+                                'is-valid': form.get('assetID')?.valid
+                            }"
+                        >
+                            <option selected value="null">
+                                Select an Asset
+                            </option>
+                            <option
+                                *ngFor="let asset of assets"
+                                [value]="asset.assetID"
+                            >
+                                {{
+                                    asset.assetID +
+                                        " - ( " +
+                                        asset.assetName +
+                                        " )"
+                                }}
+                            </option>
+                        </select>
+                        <label for="floatingSelect">Asset <span>*</span></label>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('assetID')?.valid &&
+                                form.get('assetID')?.touched
+                            "
+                            >Please select an asset!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="assetCount"
+                            placeholder=""
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('assetCount')?.valid &&
+                                    form.get('assetCount')?.touched,
+                                'is-valid': form.get('assetCount')?.valid
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Number of Assets <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('assetCount')?.valid &&
+                                form.get('assetCount')?.touched
+                            "
+                            >Please enter a valid number!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="allocationDetails"
+                            placeholder=""
+                        />
+                        <label for="floatingInput">Allocation Details</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="assetAllocatedFrom"
+                            placeholder=""
+                            [ngClass]="{
+                                'is-invalid':
+                                    (form.get('assetAllocatedFrom')?.dirty &&
+                                        !form.get('assetAllocatedFrom')
+                                            ?.valid) ||
+                                    validateDateRange(),
+                                'is-valid': !form.hasError('dateRange')
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Allocate Asset From:<span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form
+                                    .get('assetAllocatedFrom')
+                                    ?.hasError('required') &&
+                                form.get('assetAllocatedFrom')?.touched
+                            "
+                            >Please enter a valid allocation date!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="assetAllocatedTill"
+                            placeholder=""
+                            [ngClass]="{
+                                'is-invalid':
+                                    (form.get('assetAllocatedTill')?.dirty &&
+                                        !form.get('assetAllocatedTill')
+                                            ?.valid) ||
+                                    validateDateRange(),
+                                'is-valid': !form.hasError('dateRange')
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Allocate Asset Till:<span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form
+                                    .get('assetAllocatedTill')
+                                    ?.hasError('required') &&
+                                form.get('assetAllocatedTill')?.touched
+                            "
+                            >Please enter a valid allocation date!</span
+                        >
+                        <span class="invalid-fb" *ngIf="validateDateRange()"
+                            >Please enter a valid allocation date range!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="allocationStatus"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('allocationStatus')?.valid &&
+                                    form.get('allocationStatus')?.touched,
+                                'is-valid': form.get('allocationStatus')?.valid
+                            }"
+                        >
+                            <option selected value="">Select a Status</option>
+                            <option
+                                *ngFor="let status of statuses"
+                                [value]="status"
+                            >
+                                {{ status }}
+                            </option>
+                        </select>
+                        <label for="floatingSelect"
+                            >Allocation Status <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('allocationStatus')?.valid &&
+                                form.get('allocationStatus')?.touched
+                            "
+                            >Please select a status!</span
+                        >
+                    </div>
+                    <button
+                        pButton
+                        class="btn btn-outline-warning p-3 create-btn"
+                        type="submit"
+                    >
+                        Create
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <p-toast styleClass="custom-error-toast" key="error"> </p-toast>
+    <p-toast styleClass="custom-success-toast" key="success"> </p-toast>
+</main>

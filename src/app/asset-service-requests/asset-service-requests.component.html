@@ -1,0 +1,66 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Asset Service Requests</h2>
+            </div>
+            <div
+                class="container d-flex align-items-end justify-content-between"
+            >
+                <p-table
+                    [columns]="cols"
+                    [value]="requests"
+                    responsiveLayout="scroll"
+                    selectionMode="single"
+                    [(selection)]="selectedRequest"
+                    dataKey="categoryID"
+                    (onRowSelect)="onRowSelect()"
+                    class="p-datatable mb-3"
+                    [tableStyle]="{ 'min-width': '80vw' }"
+                    [paginator]="true"
+                    [rows]="5"
+                    [rowsPerPageOptions]="[5, 10, 15]"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [scrollable]="true"
+                    scrollHeight="500px"
+                >
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{ col.header }}
+                            </th>
+                            <th *ngIf="isAdmin">Update</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template
+                        pTemplate="body"
+                        let-rowData
+                        let-columns="columns"
+                    >
+                        <tr [pSelectableRow]="rowData">
+                            <td
+                                *ngFor="let col of columns"
+                                [ngClass]="
+                                    col.field === 'requestID' ? 'id-col' : ''
+                                "
+                            >
+                                {{ rowData[col.field] }}
+                            </td>
+                            <td *ngIf="isAdmin">
+                                <a
+                                    routerLink="update/{{ rowData.requestID }}"
+                                    class="p-button p-button-info"
+                                    ><i
+                                        class="pi pi-pencil"
+                                        style="color: white"
+                                    ></i
+                                ></a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </section>
+</main>

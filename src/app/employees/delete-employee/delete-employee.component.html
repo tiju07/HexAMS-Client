@@ -1,0 +1,63 @@
+<main id="main">
+  <section class="employees cta">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>Employee Details</h2>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <table class="table table-dark p-3 m-3" *ngIf="employee">
+            <tr>
+              <th>Employee ID</th>
+              <td>{{ employee.id }}</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>{{ employee.name }}</td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>{{ employee.email }}</td>
+            </tr>
+            <tr>
+              <th>Username</th>
+              <td>{{ employee.username }}</td>
+            </tr>
+            <tr>
+              <th>Gender</th>
+              <td>{{ employee.gender }}</td>
+            </tr>
+            <tr>
+              <th>Contact Number</th>
+              <td>{{ employee.contactNumber }}</td>
+            </tr>
+            <tr>
+              <th>Address</th>
+              <td>{{ employee.address }}</td>
+            </tr>
+            <tr>
+              <th>Assets Allocated</th>
+              <td>{{ employee.assetsAllocated }}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="col-6 d-flex flex-column">
+          <h3>Are you sure?</h3>
+          <div class="d-flex flex-column">
+            <p-toast></p-toast>
+            <button
+              class="btn btn-outline-warning p-3 m-3"
+              (click)="deleteEmployee()"
+            >
+              Remove Employee
+            </button>
+            <button class="btn btn-outline-warning p-3 m-3" (click)="cancel()">
+              Cancel
+            </button>
+          </div>
+          <p class="text-light">{{ temp | async }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,119 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Raise New Audit Request</h2>
+            </div>
+            <div class="d-flex flex-column flex-wrap align-items-center form">
+                <form
+                    [formGroup]="form"
+                    data-bs-theme="dark"
+                    class="d-flex flex-column"
+                    (ngSubmit)="createRequest()"
+                >
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="employeeID"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('employeeID')?.valid &&
+                                    form.get('employeeID')?.touched,
+                                'is-valid': form.get('employeeID')?.valid
+                            }"
+                        >
+                            <option selected value="null" disabled>
+                                Select an Employee
+                            </option>
+                            <option
+                                *ngFor="let employee of employees"
+                                [value]="employee.id"
+                            >
+                                {{ employee.id + " - (" + employee.name + ")" }}
+                            </option>
+                        </select>
+                        <label for="floatingSelect"
+                            >Employee <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('employeeID')?.valid &&
+                                form.get('employeeID')?.touched
+                            "
+                            >Please select an employee!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="assetID"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('assetID')?.valid &&
+                                    form.get('assetID')?.touched,
+                                'is-valid': form.get('assetID')?.valid
+                            }"
+                        >
+                            <option selected disabled value="null">
+                                Select an Asset
+                            </option>
+                            <option
+                                *ngFor="let asset of assets"
+                                [value]="asset.assetID"
+                            >
+                                {{
+                                    asset.assetID +
+                                        " - ( " +
+                                        asset.assetName +
+                                        " )"
+                                }}
+                            </option>
+                        </select>
+                        <label for="floatingSelect">Asset <span>*</span></label>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('assetID')?.valid &&
+                                form.get('assetID')?.touched
+                            "
+                            >Please select an asset!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="requestDetails"
+                            placeholder=""
+                        />
+                        <label for="floatingInput"
+                            >Additional Request Details</label
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="requestStatus"
+                            placeholder=""
+                            readonly
+                        />
+                        <label for="floatingInput">Request Status</label>
+                    </div>
+                    <button
+                        pButton
+                        class="btn btn-outline-warning p-3 create-btn"
+                        employee="submit"
+                    >
+                        Create
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <p-toast styleClass="custom-error-toast" *ngIf="!form.valid"> </p-toast>
+    <p-toast styleClass="custom-success-toast" *ngIf="form.valid"> </p-toast>
+</main>

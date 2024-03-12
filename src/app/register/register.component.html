@@ -1,0 +1,305 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Register</h2>
+            </div>
+            <div class="d-flex flex-column flex-wrap align-items-center form">
+                <div class="">
+                    <p-selectButton
+                        [options]="roles"
+                        [(ngModel)]="selectedRole"
+                        optionLabel="label"
+                        optionValue="value"
+                    ></p-selectButton>
+                </div>
+                <form
+                    [formGroup]="form"
+                    data-bs-theme="dark"
+                    class="d-flex flex-column align-items-center"
+                    (ngSubmit)="registerUser()"
+                >
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="name"
+                            formControlName="name"
+                            placeholder=""
+                            autocomplete="name"
+                            [ngClass]="{
+                                'is-invalid':
+                                    form.get('name')?.touched &&
+                                    !form.get('name')?.valid,
+                                'is-valid': !form.get('name')?.errors
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Full Name <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('name')?.errors &&
+                                form.get('name')?.touched
+                            "
+                            >Please enter a valid input with atleast 3
+                            characters!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="email"
+                            class="form-control"
+                            id="email"
+                            formControlName="email"
+                            placeholder=""
+                            autocomplete="email"
+                            [ngClass]="{
+                                'is-invalid':
+                                    form.get('email')?.touched &&
+                                    !form.get('email')?.valid,
+                                'is-valid': !form.get('email')?.errors
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Email ID <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('email')?.errors &&
+                                form.get('email')?.touched
+                            "
+                            >Please enter a valid email!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="username"
+                            formControlName="username"
+                            placeholder=""
+                            autocomplete="username"
+                            [ngClass]="{
+                                'is-invalid':
+                                    form.get('username')?.touched &&
+                                    !form.get('username')?.valid,
+                                'is-valid': !form.get('username')?.errors
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Username <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('username')?.errors &&
+                                form.get('username')?.touched
+                            "
+                            >Please enter a valid username with atleast 5
+                            characters!</span
+                        >
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <div class="form-floating input-group">
+                            <input
+                                [type]="passwordVisible ? 'text' : 'password'"
+                                formControlName="password"
+                                class="form-control"
+                                id="password"
+                                placeholder=""
+                                autocomplete="new-password"
+                                data-bs-toggle="popover"
+                                data-bs-placement="left"
+                                data-bs-html="true"
+                                data-bs-title="<h6 class='text-light'>Tips For A Strong Password</h6>"
+                                data-bs-custom-class="custom-popover"
+                                data-bs-content="<ul class='list-unstyled'>
+                                    <li>Must be at least 8 characters long.</li>
+                                    <li>Must contain at least one uppercase letter.</li>
+                                    <li>Must contain at least one lowercase letter.</li>
+                                    <li>Must contain at least one number.</li>
+                                    <li>Must contain at least one special character.</li>
+                                </ul>"
+                                [ngClass]="{
+                                    'is-invalid':
+                                        form.get('password')?.touched &&
+                                        !form.get('password')?.valid,
+                                    'is-valid': !form.get('password')?.errors
+                                }"
+                            />
+                            <label for="password"
+                                >Password <span>*</span></label
+                            >
+                            <button
+                                class="btn btn-outline-warning"
+                                type="button"
+                                id="togglePassword"
+                                (click)="togglePasswordVisibility()"
+                            >
+                                <i
+                                    [ngClass]="
+                                        passwordVisible
+                                            ? 'bi bi-eye-slash'
+                                            : 'bi bi-eye'
+                                    "
+                                    aria-hidden="true"
+                                ></i>
+                            </button>
+                        </div>
+                        <app-password-strength
+                            *ngIf="form.get('password')?.dirty"
+                            [passwordToCheck]="form.value.password"
+                            (passwordStrength)="
+                                onPasswordStrengthChanged($event)
+                            "
+                        ></app-password-strength>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('password')?.errors &&
+                                form.get('password')?.touched
+                            "
+                            >Please enter a valid password with atleast 8
+                            characters!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="input-group form-floating">
+                            <input
+                                [type]="
+                                    confirmPasswordVisible ? 'text' : 'password'
+                                "
+                                formControlName="confirmPassword"
+                                class="form-control"
+                                id="confirmPassword"
+                                placeholder=""
+                                autocomplete="new-password"
+                                [ngClass]="{
+                                    'is-invalid':
+                                        form.get('confirmPassword')?.dirty &&
+                                        form.get('confirmPassword')?.errors &&
+                                        !form.hasError('passwordsDoNotMatch'),
+                                    'is-valid':
+                                        !form.get('confirmPassword')?.errors &&
+                                        !form.hasError('passwordsDoNotMatch')
+                                }"
+                            />
+                            <label for="confirmPassword"
+                                >Confirm Password <span>*</span></label
+                            >
+                            <button
+                                class="btn btn-outline-warning"
+                                type="button"
+                                id="toggleConfirmPassword"
+                                (click)="toggleConfirmPasswordVisibility()"
+                            >
+                                <i
+                                    [ngClass]="
+                                        confirmPasswordVisible
+                                            ? 'bi bi-eye-slash'
+                                            : 'bi bi-eye'
+                                    "
+                                    aria-hidden="true"
+                                ></i>
+                            </button>
+                        </div>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('confirmPassword')?.dirty &&
+                                form.hasError('passwordsDoNotMatch')
+                            "
+                            >Passwords do not match!</span
+                        >
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="gender"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('gender')?.valid &&
+                                    form.get('gender')?.touched,
+                                'is-valid': form.get('gender')?.valid
+                            }"
+                        >
+                            <option selected value="" disabled>
+                                Select a Gender
+                            </option>
+                            <option *ngFor="let g of gender" [value]="g">
+                                {{ g }}
+                            </option>
+                        </select>
+                        <label for="floatingSelect"
+                            >Gender <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('gender')?.valid &&
+                                form.get('gender')?.touched
+                            "
+                            >Please select a status!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="contactNumber"
+                            formControlName="contactNumber"
+                            placeholder=""
+                            autocomplete="mobile"
+                            [ngClass]="{
+                                'is-invalid':
+                                    form.get('contactNumber')?.touched &&
+                                    !form.get('contactNumber')?.valid,
+                                'is-valid': !form.get('contactNumber')?.errors
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Contact Number <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('contactNumber')?.errors &&
+                                form.get('contactNumber')?.touched
+                            "
+                            >Please enter a valid contact number!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="address"
+                            formControlName="address"
+                            placeholder=""
+                            autocomplete="street-address"
+                        />
+                        <label for="floatingInput">Address</label>
+                    </div>
+                    <button
+                        pButton
+                        class="btn btn-outline-warning p-3 create-btn w-100"
+                        type="submit"
+                    >
+                        Create
+                    </button>
+                    <div class="d-flex flex-row border-custom">
+                        <span class="text-light mt-2">
+                            Already have an account?
+                            <a routerLink="/login">Login</a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>

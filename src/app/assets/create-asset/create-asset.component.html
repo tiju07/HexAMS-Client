@@ -1,0 +1,215 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Add New Asset</h2>
+            </div>
+            <div class="d-flex flex-column flex-wrap align-items-center form">
+                <form
+                    [formGroup]="form"
+                    data-bs-theme="dark"
+                    class="d-flex flex-column"
+                    (ngSubmit)="onSubmit()"
+                >
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="assetName"
+                            placeholder=""
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('assetName')?.valid &&
+                                    form.get('assetName')?.touched,
+                                'is-valid': form.get('assetName')?.valid
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Asset Name <span>*</span></label
+                        >
+                        <span class="invalid-fb" *ngIf="validator('assetName')"
+                            >Please enter a valid name!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="assetCategoryID"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('assetCategoryID')?.valid &&
+                                    form.get('assetCategoryID')?.touched,
+                                'is-valid': form.get('assetCategoryID')?.valid
+                            }"
+                        >
+                            <option selected value="null" disabled>
+                                Select a Category
+                            </option>
+                            <option
+                                *ngFor="let cat of categories"
+                                [value]="cat.categoryID"
+                            >
+                                {{ cat.categoryName }}
+                            </option>
+                        </select>
+                        <label for="floatingSelect"
+                            >Asset Category <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="validator('assetCategoryID')"
+                            >Please seelct a category!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="modelInput"
+                            formControlName="assetModel"
+                            placeholder=""
+                        />
+                        <label for="modelInput">Asset Model</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="specInput"
+                            formControlName="assetSpecifications"
+                            placeholder=""
+                        />
+                        <label for="specInput">Asset Specifications</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageInput" class="form-label"
+                            >Asset Image <span>*</span></label
+                        >
+                        <div class="input-group">
+                            <input
+                                #imageInput
+                                type="file"
+                                accept=".png, .jpg, .jpeg"
+                                class="form-control bg-outline-warning"
+                                id="imageInput"
+                                formControlName="assetImageURL"
+                                (change)="onFileChange($event)"
+                                (click)="toggleTouched()"
+                                [ngClass]="{
+                                    'is-invalid': image == null && touched,
+                                    'is-valid': image != null
+                                }"
+                            />
+                            <div class="input-group-append">
+                                <button
+                                    class="btn btn-outline-warning"
+                                    type="button"
+                                    (click)="resetFileInput()"
+                                >
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="image == null && touched"
+                            >Please upload an image!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea
+                            class="form-control"
+                            id="descInput"
+                            formControlName="assetDescription"
+                            placeholder=""
+                        ></textarea>
+                        <label for="descInput">Asset Description</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select
+                            class="form-select"
+                            formControlName="assetStatus"
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('assetStatus')?.valid &&
+                                    form.get('assetStatus')?.touched,
+                                'is-valid': form.get('assetStatus')?.valid
+                            }"
+                        >
+                            <option value="" selected disabled>
+                                Asset Status
+                            </option>
+                            <option value="Available">Available</option>
+                            <option value="Unavailable">Unavailable</option>
+                        </select>
+                        <label for="floatingSelect"
+                            >Asset Status <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="validator('assetStatus')"
+                            >Please enter a valid name!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="manufInput"
+                            formControlName="manufacturingDate"
+                            placeholder=""
+                        />
+                        <label for="manufInput">Manufacturing Date</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="date"
+                            class="form-control"
+                            id="expiryInput"
+                            formControlName="expiryDate"
+                            placeholder=""
+                        />
+                        <label for="expiryInput">Expiry Date</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="valueInput"
+                            formControlName="assetValue"
+                            placeholder=""
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('assetValue')?.valid &&
+                                    form.get('assetValue')?.touched,
+                                'is-valid': form.get('assetValue')?.valid
+                            }"
+                        />
+                        <label for="valueInput"
+                            >Asset Value <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                !form.get('assetValue')?.valid &&
+                                form.get('assetValue')?.touched
+                            "
+                        >
+                            {{ "Please enter a valid amount(greater than 0)!" }}
+                        </span>
+                    </div>
+                    <button
+                        pButton
+                        class="btn btn-outline-warning p-3 create-btn"
+                        type="submit"
+                    >
+                        Create
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <p-toast styleClass="custom-error-toast" key="error"> </p-toast>
+    <p-toast styleClass="custom-success-toast" key="success"> </p-toast>
+</main>

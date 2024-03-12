@@ -1,0 +1,21 @@
+.container {
+    backdrop-filter: blur(7px);
+}
+
+:host ::ng-deep .custom-error-toast .p-toast-message {
+    color: red;
+    background: white;
+}
+
+:host ::ng-deep .custom-error-toast .p-toast-message-icon {
+    color: red;
+}
+
+:host ::ng-deep .custom-success-toast .p-toast-message {
+    color: rgb(0, 168, 0);
+    background: white;
+}
+
+:host ::ng-deep .custom-success-toast .p-toast-message-icon {
+    color: rgb(0, 168, 0);
+}

@@ -1,0 +1,17 @@
+<div>
+    <p-progressBar
+        *ngIf="displayProgress"
+        mode="indeterminate"
+        [style]="{ height: '2px' }"
+    ></p-progressBar>
+    <app-navbar></app-navbar>
+    <div class="mt-2">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </div>
+    <app-footer></app-footer>
+    <p-scrollTop
+        [threshold]="50"
+        styleClass="custom-scrolltop"
+        icon="pi pi-arrow-up"
+    ></p-scrollTop>
+</div>

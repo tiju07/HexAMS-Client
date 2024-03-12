@@ -1,0 +1,67 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Add New Category</h2>
+            </div>
+            <div class="d-flex flex-column flex-wrap align-items-center form">
+                <form
+                    [formGroup]="form"
+                    data-bs-theme="dark"
+                    class="d-flex flex-column"
+                    (ngSubmit)="createCategory()"
+                >
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="categoryName"
+                            placeholder=""
+                            [ngClass]="{
+                                'is-invalid':
+                                    !form.get('categoryName')?.valid &&
+                                    form.get('categoryName')?.touched,
+                                'is-valid': form.get('categoryName')?.valid
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Category Name <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form
+                                    .get('categoryName')
+                                    ?.hasError('required') &&
+                                form.get('categoryName')?.touched
+                            "
+                            >Please enter a valid name!</span
+                        >
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input
+                            type="textarea"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="categoryDescription"
+                            placeholder="null"
+                        />
+                        <label for="floatingInput"
+                            >Description For Category</label
+                        >
+                    </div>
+                    <button
+                        pButton
+                        class="btn btn-outline-warning p-3 create-btn"
+                        type="submit"
+                    >
+                        Create
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <p-toast styleClass="custom-error-toast" key="error"> </p-toast>
+    <p-toast styleClass="custom-success-toast" key="success"> </p-toast>
+</main>

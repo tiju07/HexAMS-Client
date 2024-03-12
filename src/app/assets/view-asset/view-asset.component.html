@@ -1,0 +1,87 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Asset Details</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <table class="table table-dark">
+                        <tr>
+                            <th>Asset ID</th>
+                            <td>{{ asset.assetID }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Name</th>
+                            <td>{{ asset.assetName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Type</th>
+                            <td>{{ asset.assetCategoryID }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Model</th>
+                            <td>{{ asset.assetModel }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Specifications</th>
+                            <td>{{ asset.assetSpecifications }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Description</th>
+                            <td>{{ asset.assetDescription }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Status</th>
+                            <td>{{ asset.assetStatus }}</td>
+                        </tr>
+                        <tr>
+                            <th>Manufacturing Date</th>
+                            <td>{{ asset.manufacturingDate | date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Expiry Date</th>
+                            <td>{{ asset.expiryDate ?? "-" }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Value</th>
+                            <td>{{ asset.assetValue | currency : "USD" }}</td>
+                        </tr>
+                    </table>
+                    <div class="d-flex flex-column mt-3">
+                        <button
+                            *ngIf="isAdmin"
+                            class="btn btn-outline-warning p-2 my-2"
+                            routerLink="../../update/{{ asset.assetID }}"
+                        >
+                            Update Asset
+                        </button>
+                        <button
+                            *ngIf="isAdmin"
+                            class="btn btn-outline-warning p-2 my-2"
+                            routerLink="../../delete/{{ asset.assetID }}"
+                        >
+                            Delete Asset
+                        </button>
+                        <button
+                            *ngIf="!isAdmin"
+                            routerLink="../../../asset-borrow-return-requests/add/{{
+                                asset.assetID
+                            }}"
+                            class="btn btn-outline-warning p-2 my-2"
+                        >
+                            Create New Request
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <img
+                        [src]="asset.assetImageURL"
+                        class="img-fluid"
+                        alt="Asset Image"
+                    />
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

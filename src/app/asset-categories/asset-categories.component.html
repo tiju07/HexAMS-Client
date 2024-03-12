@@ -1,0 +1,80 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Asset Categories</h2>
+            </div>
+            <div
+                class="container d-flex align-items-end justify-content-between"
+            >
+                <p-table
+                    [columns]="cols"
+                    [value]="categories"
+                    responsiveLayout="scroll"
+                    selectionMode="single"
+                    [(selection)]="selectedCategory"
+                    class="p-datatable"
+                    dataKey="categoryID"
+                    (onRowSelect)="onRowSelect()"
+                    [paginator]="true"
+                    [rows]="5"
+                    [rowsPerPageOptions]="[5, 10, 15]"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [scrollable]="true"
+                    scrollHeight="500px"
+                    [tableStyle]="{ 'min-width': '80vw' }"
+                >
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{ col.header }}
+                            </th>
+                            <th *ngIf="isAdmin">Update</th>
+                            <th *ngIf="isAdmin">Delete</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template
+                        pTemplate="body"
+                        let-rowData
+                        let-columns="columns"
+                    >
+                        <tr [pSelectableRow]="rowData">
+                            <td
+                                *ngFor="let col of columns"
+                                [ngClass]="
+                                    col.field === 'categoryID' ? 'id-col' : ''
+                                "
+                            >
+                                {{ rowData[col.field] }}
+                            </td>
+                            <td *ngIf="isAdmin">
+                                <a
+                                    (click)="updateCategory(rowData.categoryID)"
+                                    class="p-button p-button-info"
+                                    ><i
+                                        class="pi pi-pencil"
+                                        style="color: white"
+                                    ></i
+                                ></a>
+                            </td>
+                            <td *ngIf="isAdmin">
+                                <a
+                                    class="p-button p-button-danger"
+                                    (click)="deleteCategory(rowData.categoryID)"
+                                    ><i
+                                        class="pi pi-trash"
+                                        style="color: white"
+                                    ></i
+                                ></a>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </section>
+    <p-toast styleClass="custom-success-toast" key="success"> </p-toast>
+    <p-toast styleClass="custom-error-toast" key="error"> </p-toast>
+    <p-confirmDialog></p-confirmDialog>
+</main>

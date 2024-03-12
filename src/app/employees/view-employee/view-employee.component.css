@@ -1,0 +1,29 @@
+:host ::ng-deep .custom-error-toast .p-toast-message {
+    color: red;
+    background: white;
+}
+
+:host ::ng-deep .custom-error-toast .p-toast-message-icon {
+    color: red;
+}
+
+:host ::ng-deep .custom-success-toast .p-toast-message {
+    color: rgb(0, 168, 0);
+    background: white;
+    border: solid rgb(0, 168, 0);
+    border-left-color: rgb(0, 168, 0);
+    border-width: 0 0 0 6px;
+}
+
+:host ::ng-deep .custom-success-toast .p-toast-icon-close-icon {
+    color: rgb(0, 168, 0);
+}
+
+:host ::ng-deep .custom-success-toast .p-toast-message-icon {
+    color: rgb(0, 168, 0);
+
+}
+
+.p-toastitem {
+    border: 6px solid green !important;
+}

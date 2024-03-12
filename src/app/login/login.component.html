@@ -1,0 +1,125 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Login</h2>
+            </div>
+            <div class="d-flex flex-column flex-wrap align-items-center form">
+                <div class="">
+                    <p-selectButton
+                        [options]="roles"
+                        [(ngModel)]="selectedRole"
+                        optionLabel="label"
+                        optionValue="value"
+                    ></p-selectButton>
+                </div>
+                <form
+                    [formGroup]="form"
+                    data-bs-theme="dark"
+                    class="d-flex flex-column align-items-center"
+                    (ngSubmit)="login()"
+                >
+                    <div class="form-floating mb-3">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="floatingInput"
+                            formControlName="userName"
+                            placeholder=""
+                            autocomplete="userName"
+                            [ngClass]="{
+                                'is-invalid':
+                                    form.get('userName')?.touched &&
+                                    !form.get('userName')?.valid,
+                                'is-valid': !form.get('userName')?.errors
+                            }"
+                        />
+                        <label for="floatingInput"
+                            >Username <span>*</span></label
+                        >
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('userName')?.errors &&
+                                form.get('userName')?.touched
+                            "
+                            >Please enter a valid username!</span
+                        >
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <div class="form-floating input-group">
+                            <input
+                                [type]="passwordVisible ? 'text' : 'password'"
+                                formControlName="password"
+                                class="form-control"
+                                autocomplete="current-password"
+                                id="password"
+                                placeholder=""
+                                [ngClass]="{
+                                    'is-invalid':
+                                        form.get('password')?.touched &&
+                                        !form.get('password')?.valid,
+                                    'is-valid': !form.get('password')?.errors
+                                }"
+                            />
+                            <label for="password"
+                                >Password <span>*</span></label
+                            >
+                            <button
+                                class="btn btn-outline-warning"
+                                type="button"
+                                id="togglePassword"
+                                (click)="togglePasswordVisibility()"
+                            >
+                                <i
+                                    [ngClass]="
+                                        passwordVisible
+                                            ? 'bi bi-eye-slash'
+                                            : 'bi bi-eye'
+                                    "
+                                    aria-hidden="true"
+                                ></i>
+                            </button>
+                        </div>
+                        <span
+                            class="invalid-fb"
+                            *ngIf="
+                                form.get('password')?.errors &&
+                                form.get('password')?.touched
+                            "
+                            >Please enter a valid password!</span
+                        >
+                    </div>
+                    <button
+                        pButton
+                        class="btn btn-outline-warning p-3 create-btn w-100"
+                        type="submit"
+                    >
+                        Login
+                    </button>
+                    <h6 class="text-tertiary mt-4">
+                        <a routerLink="/reset-password">Forgot Password?</a>
+                    </h6>
+                    <div class="d-flex flex-row border-custom">
+                        <span class="text-light mt-2">
+                            Don't have an account?
+                            <a routerLink="/register">Register</a>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <p-toast
+        styleClass="custom-error-toast"
+        *ngIf="!form.valid || selectedRole == undefined"
+    >
+    </p-toast>
+    <p-toast
+        styleClass="custom-success-toast"
+        *ngIf="form.valid && selectedRole != undefined"
+    >
+    </p-toast>
+    <p-toast key="error" styleClass="custom-error-toast"> </p-toast>
+</main>

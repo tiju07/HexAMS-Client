@@ -1,0 +1,52 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Asset Categories</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <table class="table table-dark p-3 d-border-box">
+                        <tr>
+                            <th [width]="'30%'">Category ID</th>
+                            <td>{{ category.categoryID }}</td>
+                        </tr>
+                        <tr>
+                            <th>Category Name</th>
+                            <td>{{ category.categoryName }}</td>
+                        </tr>
+                        <tr>
+                            <th>Category Description</th>
+                            <td>{{ category.categoryDescription }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div
+                    *ngIf="isAdmin"
+                    class="col-lg-6 col-md-6 d-flex flex-column"
+                >
+                    <button
+                        class="btn btn-outline-warning p-3 my-2"
+                        routerLink="../../update/{{ category.categoryID }}"
+                    >
+                        <i class="pi pi-pencil" style="color: blue"></i> Update
+                    </button>
+                    <p-toast styleClass="custom-success-toast" key="success">
+                    </p-toast>
+                    <p-toast styleClass="custom-error-toast" key="error">
+                    </p-toast>
+                    <p-confirmDialog></p-confirmDialog>
+                    <button
+                        class="btn btn-outline-warning p-3 my-2"
+                        (click)="deleteCategory()"
+                    >
+                        <i class="pi pi-trash" style="color: red"></i>
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <p-toast styleClass="custom-success-toast" key="success"> </p-toast>
+    <p-toast styleClass="custom-error-toast" key="error"> </p-toast>
+</main>

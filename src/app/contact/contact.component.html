@@ -1,0 +1,94 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+            </div>
+            <div class="d-flex flex-column flex-wrap align-items-center">
+                <h4 class="text-white">Want to get in touch?</h4>
+                <p>
+                    Feel free to reach out to us at
+                    <a href="mailto:hexamstech@gmail.com"
+                        >hexamstech&#64;gmail.com</a
+                    >
+                </p>
+                <p>We'll get back to you as soon as possible.</p>
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <!-- <h4 class="text-white">Want to get in touch?</h4> -->
+                        <form
+                            class="form d-flex flex-column flex-wrap"
+                            style="margin-top: 2rem"
+                            [formGroup]="form"
+                            (ngSubmit)="onSubmit()"
+                        >
+                            <div class="form-floating mb-3">
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="floatingInput"
+                                    placeholder="Name"
+                                    formControlName="name"
+                                    autocomplete="name"
+                                    [ngClass]="{
+                                        'is-invalid':
+                                            form.get('name')?.errors &&
+                                            form.get('name')?.touched
+                                    }"
+                                />
+                                <label for="floatingInput"
+                                    >Name <span>*</span></label
+                                >
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="floatingInput"
+                                    placeholder="name@example.com"
+                                    formControlName="email"
+                                    autocomplete="email"
+                                    [ngClass]="{
+                                        'is-invalid':
+                                            form.get('email')?.errors &&
+                                            form.get('email')?.touched
+                                    }"
+                                />
+                                <label for="floatingInput"
+                                    >Email address <span>*</span></label
+                                >
+                            </div>
+                            <div class="form-floating">
+                                <textarea
+                                    class="form-control"
+                                    placeholder="Leave a message for us here..."
+                                    style="height: 100px"
+                                    formControlName="message"
+                                    minlength="15"
+                                    [ngClass]="{
+                                        'is-invalid':
+                                            form.get('message')?.errors &&
+                                            form.get('message')?.touched
+                                    }"
+                                ></textarea>
+                                <label for="floatingTextarea2"
+                                    >Message(Minimum 15 characters)
+                                    <span>*</span></label
+                                >
+                            </div>
+                            <button
+                                class="btn btn-outline-warning p-3 mt-3"
+                                employee="submit"
+                                type="submit"
+                            >
+                                Send
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <p-toast styleClass="custom-error-toast" key="error"> </p-toast>
+    <p-toast styleClass="custom-success-toast" key="success"> </p-toast>
+</main>

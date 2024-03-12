@@ -1,0 +1,57 @@
+<main id="main">
+    <section id="about" class="assets cta">
+        <div class="container mb-3" data-aos="fade-up">
+            <div class="section-title">
+                <h2>Asset Categories</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <table class="table table-dark p-3 d-border-box">
+                        <tr>
+                            <th>Asset Allocation ID</th>
+                            <td>{{ allocation.assetAllocationID }}</td>
+                        </tr>
+                        <tr>
+                            <th>Employee ID</th>
+                            <td>{{ allocation.employeeID }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset ID</th>
+                            <td>{{ allocation.assetID }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Count</th>
+                            <td>{{ allocation.assetCount }}</td>
+                        </tr>
+                        <tr>
+                            <th>Allocation Details</th>
+                            <td>{{ allocation.allocationDetails }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Allocated From</th>
+                            <td>{{ allocation.assetAllocatedFrom | date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Asset Allocated Till</th>
+                            <td>{{ allocation.assetAllocatedTill | date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Allocation Status</th>
+                            <td>{{ allocation.allocationStatus }}</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-6 col-md-6 d-flex flex-column">
+                    <button
+                        class="btn btn-outline-warning p-3 my-2"
+                        routerLink="../../update/{{
+                            allocation.assetAllocationID
+                        }}"
+                    >
+                        <i class="pi pi-pencil" style="color: blue"></i> Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

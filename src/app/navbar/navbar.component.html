@@ -1,0 +1,217 @@
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+        <h1 class="logo me-auto me-lg-0">
+            <a routerLink="home">HexAMS<span>.</span></a>
+        </h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a routerLink="" class="logo me-auto me-lg-0"
+            ><img src="../../assets/brand-logo.png" alt="" class="img-fluid"
+        /></a> -->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li>
+                    <a
+                        class="nav-link scrollto"
+                        routerLink="home"
+                        routerLinkActive="active"
+                        >Home</a
+                    >
+                </li>
+                <li class="dropdown">
+                    <a
+                        class="nav-link scrollto"
+                        routerLink="employees"
+                        routerLinkActive="active"
+                        >Employees<i class="bi bi-chevron-down"></i
+                    ></a>
+                    <ul>
+                        <li>
+                            <a routerLink="employees"
+                                ><span>View All Employees</span></a
+                            >
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a
+                        routerLink="assets"
+                        [ngClass]="onActivateAssetUrls() ? 'active' : ''"
+                        ><span>Assets</span> <i class="bi bi-chevron-down"></i
+                    ></a>
+                    <ul>
+                        <li class="dropdown">
+                            <a routerLink="assets"
+                                ><span>Assets</span>
+                                <i class="bi bi-chevron-right"></i
+                            ></a>
+                            <ul>
+                                <li>
+                                    <a routerLink="assets">View All Assets</a>
+                                </li>
+                                <li>
+                                    <a routerLink="assets/add">Add New Asset</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a routerLink="allocation-details"
+                                ><span>Asset Allocations</span>
+                                <i class="bi bi-chevron-right"></i
+                            ></a>
+                            <ul>
+                                <li>
+                                    <a routerLink="allocation-details"
+                                        >View All Asset Allocations</a
+                                    >
+                                </li>
+                                <li>
+                                    <a routerLink="allocation-details/add"
+                                        >New Asset Allocation</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a routerLink="asset-categories"
+                                ><span>Asset Categories</span>
+                                <i class="bi bi-chevron-right"></i
+                            ></a>
+                            <ul>
+                                <li>
+                                    <a routerLink="asset-categories"
+                                        >View All Categories</a
+                                    >
+                                </li>
+                                <li>
+                                    <a routerLink="asset-categories/add"
+                                        >Create New Category</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a
+                        routerLink="asset-borrow-return-requests"
+                        [ngClass]="onActivateRequestUrls() ? 'active' : ''"
+                        ><span>Requests</span> <i class="bi bi-chevron-down"></i
+                    ></a>
+                    <ul>
+                        <li class="dropdown">
+                            <a routerLink="asset-borrow-return-requests"
+                                ><span>Asset Borrow & Return Requests</span>
+                                <i class="bi bi-chevron-right"></i
+                            ></a>
+                            <ul>
+                                <li>
+                                    <a routerLink="asset-borrow-return-requests"
+                                        >View All Requests</a
+                                    >
+                                </li>
+                                <li>
+                                    <a
+                                        routerLink="asset-borrow-return-requests/add"
+                                        >Create A New Request</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a routerLink="asset-service-requests"
+                                ><span>Asset Service Requests</span>
+                                <i class="bi bi-chevron-right"></i
+                            ></a>
+                            <ul>
+                                <li>
+                                    <a routerLink="asset-service-requests"
+                                        >View All Requests</a
+                                    >
+                                </li>
+                                <li>
+                                    <a routerLink="asset-service-requests/add"
+                                        >Create A New Request</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a routerLink="asset-audit-requests"
+                                ><span>Asset Audit Requests</span>
+                                <i class="bi bi-chevron-right"></i
+                            ></a>
+                            <ul>
+                                <li>
+                                    <a routerLink="asset-audit-requests"
+                                        >View All Requests</a
+                                    >
+                                </li>
+                                <li>
+                                    <a routerLink="asset-audit-requests/add"
+                                        >Create A New Request</a
+                                    >
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a
+                        class="nav-link scrollto"
+                        routerLink="/contact"
+                        routerLinkActive="active"
+                        >Contact</a
+                    >
+                </li>
+            </ul>
+            <i
+                class="bi bi-list mobile-nav-toggle"
+                (click)="toggleNavbarMobile($event)"
+            ></i>
+        </nav>
+        <div class="d-flex align-items-center justify-content-center">
+            <div *ngIf="!isAuthenticatd">
+                <a routerLink="register" class="get-started-btn scrollto mx-2"
+                    >Register</a
+                >
+                <a routerLink="login" class="get-started-btn scrollto mx-2"
+                    >Login</a
+                >
+            </div>
+            <div *ngIf="isAuthenticatd">
+                <button (click)="logout()" class="btn btn-outline-warning">
+                    Logout
+                </button>
+            </div>
+            <a
+                routerLink="profile"
+                class="d-flex flex-column align-items-center ml-4 profile-img"
+                *ngIf="isAuthenticatd"
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    fill="currentColor"
+                    class="bi bi-person-circle"
+                    viewBox="0 0 16 16"
+                >
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path
+                        fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
+                    />
+                </svg>
+                <div
+                    class="align-self-center text-light"
+                    *ngIf="isAuthenticatd"
+                >
+                    Welcome {{ user }}!&nbsp;&nbsp;
+                </div>
+            </a>
+        </div>
+    </div>
+    <p-toast styleClass="custom-error-toast" key="error"> </p-toast>
+    <p-toast styleClass="custom-success-toast" key="success"> </p-toast>
+</header>
