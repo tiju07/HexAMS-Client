@@ -179,8 +179,8 @@
                             placeholder=""
                             [ngClass]="{
                                 'is-invalid':
-                                    form.get('manufacturingDate')?.dirty &&
-                                    form.get('expiryDate')?.dirty &&
+                                    (form.get('manufacturingDate')?.dirty &&
+                                        form.get('expiryDate')?.dirty) ||
                                     validateDateRange(),
                                 'is-valid':
                                     !form.hasError('dateRange') &&
