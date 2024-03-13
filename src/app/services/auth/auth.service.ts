@@ -58,6 +58,6 @@ export class AuthService {
     }
 
     logout() {
-        return this.http.post(`${this.url}/Auth/Logout`, { withCredentials: true, observe: 'response' });
+        return this.http.post(`${this.url}/Logout`, { withCredentials: true, observe: 'response' });
     }
 }

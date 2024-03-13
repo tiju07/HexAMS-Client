@@ -51,7 +51,7 @@ export class NavbarComponent implements OnInit {
     }
 
     logout() {
-        this.authService.logout().subscribe();
+        this.authService.logout().subscribe(data => console.log(data));
         console.log("Cookies present before?:" + this.cookieService.check('auth-token') && this.cookieService.check('name'));
         this.cookieService.deleteAll('/', 'localhost', false, 'Lax');
         console.log("Cookies present after?:" + this.cookieService.check('auth-token') && this.cookieService.check('name'));
