@@ -5,6 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { IAsset } from '../../interfaces/iasset';
 import { AssetService } from '../../services/asset-catalogue/asset.service';
 import { MessageService } from 'primeng/api';
+import { JwtDecryptorService } from '../../helpers/jwt-decryptor.service';
 
 @Component({
     selector: 'app-create-asset-service-request',
@@ -12,14 +13,14 @@ import { MessageService } from 'primeng/api';
     styleUrl: './create-asset-service-request.component.css'
 })
 export class CreateAssetServiceRequestComponent implements OnInit {
-    constructor(private serviceRequestService: ServiceRequestsService, private router: Router, private fb: FormBuilder, private assetService: AssetService, private messageService: MessageService, private activatedRoute: ActivatedRoute) { }
+    constructor(private serviceRequestService: ServiceRequestsService, private router: Router, private fb: FormBuilder, private assetService: AssetService, private messageService: MessageService, private activatedRoute: ActivatedRoute, private jwtService: JwtDecryptorService) { }
 
     assets!: IAsset[];
     issueTypes = ['Malfunction', 'Repair'];
 
     form = this.fb.group({
         requestID: [0],
-        employeeID: [1],
+        employeeID: [this.jwtService.getUserData().id, [Validators.required]],
         assetID: [null, [Validators.required]],
         issueType: ['', [Validators.required]],
         requestDetails: [''],
@@ -28,6 +29,7 @@ export class CreateAssetServiceRequestComponent implements OnInit {
 
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(data => this.assets = data['assets'] as IAsset[]);
+        this.jwtService.
     }
 
     createRequest() {
