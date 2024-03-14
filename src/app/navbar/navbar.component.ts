@@ -52,15 +52,11 @@ export class NavbarComponent implements OnInit {
 
     logout() {
         this.authService.logout().subscribe(data => console.log(data));
-        console.log("Cookies present before?:" + this.cookieService.check('auth-token'));
-        this.cookieService.deleteAll('/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', true, 'None');
-        this.cookieService.delete('auth-token', '/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', true, 'None');
-        this.cookieService.delete('name', '/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', true, 'None');
-        console.log("Cookies present after?:" + this.cookieService.check('auth-token'));
-        console.log(this.cookieService.check('name'));
+        this.cookieService.set('auth-token', '', { sameSite: 'None', expires: new Date(new Date().setFullYear(new Date().getFullYear() - 1)), secure: true, path: '/' });
+        this.cookieService.set('name', '', { sameSite: 'None', expires: new Date(new Date().setFullYear(new Date().getFullYear() - 1)), secure: true, path: '/' });
         if (!this.cookieService.check('auth-token') && !this.cookieService.check('name')) {
             this.messageService.add({ key: 'success', severity: "success", summary: "Success", detail: "Logout Successful!", life: 1500 });
-            this.jwtService.setSubject({ isAuthenticatd: false, user: undefined });
+            this.jwtService.setSubject({ isAuthenticated: false, user: undefined });
             this.router.navigate(['/login']);
         }
         else {
