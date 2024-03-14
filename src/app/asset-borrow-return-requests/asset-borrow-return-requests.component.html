@@ -44,8 +44,20 @@
                                 [ngClass]="
                                     col.field === 'requestID' ? 'id-col' : ''
                                 "
+                                [ngClass]="
+                                    col.field == 'requestStatus'
+                                        ? getStyleClass(rowData[col.field])
+                                        : ''
+                                "
+                                [ngClass]="
+                                    col.field == 'requestStatus'
+                                        ? getStyleClass(rowData[col.field])
+                                        : ''
+                                "
                             >
-                                {{
+                                <span *ngIf="col.field == 'requestStatus'"
+                                    >.</span
+                                >{{
                                     col.field == "assetAllocationFrom" ||
                                     col.field == "assetAllocationTill"
                                         ? (rowData[col.field] | date)

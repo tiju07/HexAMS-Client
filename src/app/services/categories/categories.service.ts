@@ -16,7 +16,7 @@ export class CategoriesService {
     }
 
     getCategoryByID(id: number) {
-        return this.http.get<ICategory>(`${this.url}/Categories / ` + id, { withCredentials: true })
+        return this.http.get<ICategory>(`${this.url}/Categories/` + id, { withCredentials: true })
     }
 
     createCategory(category: ICategory) {

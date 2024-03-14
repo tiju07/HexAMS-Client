@@ -45,8 +45,15 @@
                                 [ngClass]="
                                     col.field === 'requestID' ? 'id-col' : ''
                                 "
+                                [ngClass]="
+                                    col.field == 'requestStatus'
+                                        ? getStyleClass(rowData[col.field])
+                                        : ''
+                                "
                             >
-                                {{ rowData[col.field] }}
+                                <span *ngIf="col.field == 'requestStatus'"
+                                    >.</span
+                                >{{ rowData[col.field] }}
                             </td>
                             <td>
                                 <a

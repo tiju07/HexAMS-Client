@@ -16,12 +16,12 @@
                             <td>{{ asset.assetName }}</td>
                         </tr>
                         <tr>
-                            <th>Asset Type</th>
-                            <td>{{ asset.assetCategoryID }}</td>
+                            <th>Asset Category</th>
+                            <td>{{ category }}</td>
                         </tr>
                         <tr>
                             <th>Asset Model</th>
-                            <td>{{ asset.assetModel }}</td>
+                            <td>{{ asset.assetModel ?? "N/A" }}</td>
                         </tr>
                         <tr>
                             <th>Asset Specifications</th>
@@ -37,11 +37,23 @@
                         </tr>
                         <tr>
                             <th>Manufacturing Date</th>
-                            <td>{{ asset.manufacturingDate | date }}</td>
+                            <td>
+                                {{
+                                    asset.manufacturingDate != null
+                                        ? (asset.manufacturingDate | date)
+                                        : "N/A"
+                                }}
+                            </td>
                         </tr>
                         <tr>
                             <th>Expiry Date</th>
-                            <td>{{ asset.expiryDate }}</td>
+                            <td>
+                                {{
+                                    asset.expiryDate != null
+                                        ? (asset.expiryDate | date)
+                                        : "N/A"
+                                }}
+                            </td>
                         </tr>
                         <tr>
                             <th>Asset Value</th>

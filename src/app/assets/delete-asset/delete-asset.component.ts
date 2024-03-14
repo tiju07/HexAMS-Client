@@ -4,6 +4,7 @@ import { AssetService } from '../../services/asset-catalogue/asset.service';
 import { IAsset } from '../../interfaces/iasset';
 import { MessageService } from 'primeng/api';
 import { Location } from '@angular/common';
+import { CategoriesService } from '../../services/categories/categories.service';
 
 @Component({
     selector: 'app-delete-asset',
@@ -13,13 +14,16 @@ import { Location } from '@angular/common';
 })
 export class DeleteAssetComponent {
 
-    constructor(private assetService: AssetService, private activatedRoute: ActivatedRoute, private messageService: MessageService, private router: Router, private location: Location) {
+    constructor(private assetService: AssetService, private activatedRoute: ActivatedRoute, private messageService: MessageService, private router: Router, private location: Location, private categoryService: CategoriesService) {
     }
 
     asset!: IAsset;
+    category = '';
+
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(data => this.asset = data['data'] as IAsset);
         console.log("Asset: " + JSON.stringify(this.asset));
+        this.categoryService.getCategoryByID(this.asset.assetCategoryID as number).subscribe(data => this.category = data.categoryName as string)
     }
 
     deleteAsset() {

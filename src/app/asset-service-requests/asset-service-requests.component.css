@@ -6,3 +6,24 @@
 .id-col {
     background-color: rgb(212, 212, 212);
 }
+
+
+.open span {
+    font-size: 5em;
+    color: green;
+}
+
+.rejected span {
+    font-size: 5em;
+    color: red;
+}
+
+.servicing span {
+    font-size: 5em;
+    color: orange;
+}
+
+.closed span {
+    font-size: 5em;
+    color: blue;
+}
