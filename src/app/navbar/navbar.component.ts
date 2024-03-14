@@ -52,10 +52,10 @@ export class NavbarComponent implements OnInit {
 
     logout() {
         this.authService.logout().subscribe(data => console.log(data));
-        console.log("Cookies present before?:" + this.cookieService.check('auth-token') && this.cookieService.check('name'));
-        this.cookieService.deleteAll('/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', false, 'None');
-        this.cookieService.delete('auth-token', '/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', false, 'None');
-        this.cookieService.delete('name', '/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', false, 'None');
+        console.log("Cookies present before?:" + this.cookieService.check('auth-token'));
+        this.cookieService.deleteAll('/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', true, 'None');
+        this.cookieService.delete('auth-token', '/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', true, 'None');
+        this.cookieService.delete('name', '/', 'ambitious-ground-093d0b110.5.azurestaticapps.net', true, 'None');
         console.log("Cookies present after?:" + this.cookieService.check('auth-token'));
         console.log(this.cookieService.check('name'));
         if (!this.cookieService.check('auth-token') && !this.cookieService.check('name')) {
