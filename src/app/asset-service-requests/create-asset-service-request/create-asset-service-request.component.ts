@@ -29,7 +29,6 @@ export class CreateAssetServiceRequestComponent implements OnInit {
 
     ngOnInit(): void {
         this.activatedRoute.data.subscribe(data => this.assets = data['assets'] as IAsset[]);
-        this.jwtService.
     }
 
     createRequest() {
