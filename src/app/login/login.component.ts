@@ -46,8 +46,8 @@ export class LoginComponent {
                     if (data.status == 200) {
                         this.messageService.add({ key: 'success', severity: 'success', summary: 'Success', detail: 'Login Successful!', life: 1500 });
                         this.cookieService.deleteAll();
-                        this.cookieService.set('auth-token', data.body.token, { sameSite: 'Lax', expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)) });
-                        this.cookieService.set('name', data.body.name, { sameSite: 'Lax', expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)) });
+                        this.cookieService.set('auth-token', data.body.token, { sameSite: 'None', expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)) });
+                        this.cookieService.set('name', data.body.name, { sameSite: 'None', expires: new Date(new Date().setFullYear(new Date().getFullYear() + 1)) });
                         this.jwtService.setSubject({ isAuthenticated: true, user: this.cookieService.get('name') });
                         const lastActivePage = this.lastActivePageService.getLastActivePage();
                         this.lastActivePageService.clearLastActivePage()
